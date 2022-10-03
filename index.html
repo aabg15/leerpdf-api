@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leer PDF</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body>
+    <center>
+        <div class="card">
+            <div class="card-body">
+
+
+                <form name="form1" enctype="multipart/form-data" method="post" action="apipdf.php">
+
+                    <div class="form-control">
+                        <input name="file" type="file" required accept="application/pdf" />
+                    </div>
+                    <br>
+                    <input type="submit" id="btnapi" class="btnapi" disabled value="Consumir API" />
+                    <br><br>
+
+                </form>
+                <br>
+
+
+
+                <form action="scraping.php" method="post" enctype="multipart/form-data">
+                    
+                    <div class="form-control">
+                        <input name="file" type="file" required accept="application/pdf" />
+                        
+
+                    </div>
+                    <br>
+                    <input type="submit" id="btnscraping" class="btnscraping" disabled value="Scraping PDF" />
+
+                </form> 
+
+
+                <p id="mensaje"> </p>
+            </div>
+        </div>
+    </center>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        /*  codigoJquery */
+        $(document).on('change', 'input[type="file"]', function () {
+            var fileName = this.files[0].name;
+            var ext = fileName.split('.').pop();
+            ext = ext.toLowerCase();
+            switch (ext) {
+                case 'pdf':
+                    $('#mensaje').html("Formato correcto!");
+                    //activar boton
+                    $('.btnscraping').prop('disabled', false)
+                    $('.btnapi').prop('disabled', false)
+                    break;
+                default:
+                    $('#mensaje').html("Solo se aceptan formatos PDF!");
+                    $('.btnapi').prop('disabled', true)
+                    $('.btnscraping').prop('disabled', true)
+
+            }
+        });
+
+    </script>
+
+    <!-- <script>
+        function leerPdf() {
+            console.log('llego aqui');
+            return
+            $.ajax({
+                type: 'POST', //aqui puede ser igual get
+                url: 'funciones/mifuncion.php',//aqui va tu direccion donde esta tu funcion php
+                data: { id: 1, otrovalor: 'valor' },//aqui tus datos
+                success: function (data) {
+                    //lo que devuelve tu archivo mifuncion.php
+                },
+                error: function (data) {
+                    //lo que devuelve si falla tu archivo mifuncion.php
+                }
+            });
+        }
+    </script> -->
+
+</body>
+
+</html>
